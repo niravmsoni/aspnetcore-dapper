@@ -36,5 +36,11 @@
 	- Github - https://github.com/DapperLib/Dapper
 
 	- 2. Dapper Basics
-		- 
-
+		- Created a console application.
+		- Reading connection string from appsettings in console application (Something new!)
+			- Inject IConfigurationRoot in Program
+			- Install package "Microsoft.Extensions.Configurations.Abstractions"
+			- Create ConfigurationBuilder object and set basepath and json file (Refer Program)
+			- For resolving error on Setbasepath, add "Microsoft.Extensions.Configuration.Json"
+			- Added appsettings.json to console app
+			- Set DefaultConnection value under Connection string
