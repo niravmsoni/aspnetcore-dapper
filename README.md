@@ -7,7 +7,7 @@
 	- Full-blown ORM(EF) vs Micro-ORM(Dapper)
 	- ORM
 		- Maps DB and C# objects
-		- Generates SQL
+		- Generates SQL based on C# objects
 		- Change Tracking
 		
 	- Micro-ORM
@@ -33,4 +33,8 @@
 			- PostGreSQL
 			- More..
 			
-	Github - https://github.com/DapperLib/Dapper
+	- Github - https://github.com/DapperLib/Dapper
+
+	- 2. Dapper Basics
+		- 
+
