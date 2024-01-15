@@ -28,7 +28,7 @@ namespace DataLayer.Repository
 
         public List<Contact> GetAll()
         {
-            return this._db.Query<Contact>("select * from Contacts").ToList();
+            return this._db.Query<Contact>("select FirstName FName, Id, LastName, Email, Company, Title from Contacts").ToList();
         }
 
         public void Remove(int id)
