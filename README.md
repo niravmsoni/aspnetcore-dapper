@@ -46,3 +46,5 @@
 			- Set DefaultConnection value under Connection string
 
 		- Update Appsettings.json from local machine
+			- Query<T>("select statement that maps with T")
+				- Refer ContactRepository.GetAll() method
