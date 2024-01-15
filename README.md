@@ -44,3 +44,5 @@
 			- For resolving error on Setbasepath, add "Microsoft.Extensions.Configuration.Json"
 			- Added appsettings.json to console app
 			- Set DefaultConnection value under Connection string
+
+		- Update Appsettings.json from local machine

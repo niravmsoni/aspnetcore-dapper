@@ -1,4 +1,5 @@
-﻿using DataLayer.Interface;
+﻿using Dapper;
+using DataLayer.Interface;
 using DataLayer.Models;
 using System.Data;
 using System.Data.SqlClient;
@@ -24,9 +25,10 @@ namespace DataLayer.Repository
             throw new NotImplementedException();
         }
 
+
         public List<Contact> GetAll()
         {
-            throw new NotImplementedException();
+            return this._db.Query<Contact>("select * from Contacts").ToList();
         }
 
         public void Remove(int id)
