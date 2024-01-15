@@ -1,4 +1,5 @@
 ﻿using DataLayer.Interface;
+using DataLayer.Models;
 using DataLayer.Repository;
 using Microsoft.Extensions.Configuration;
 using System.Diagnostics;
@@ -10,11 +11,14 @@ namespace Runner
         private static IConfigurationRoot _config;
         public static void Main(string[] args)
         {
-            //Call Initialize to setup configuration object
+            // Call Initialize to setup configuration object
             Initialize();
 
-            //Test GetAll()
-            Get_all_should_return_6_results();
+            // Test GetAll()
+            //Get_all_should_return_6_results();
+
+            // Test Add()
+            Insert_should_assign_identity_to_new_entity();
         }
 
         private static void Initialize()
@@ -36,6 +40,9 @@ namespace Runner
         }
 
         #region Below methods are dummy methods for testing the output
+        /// <summary>
+        /// Testing GetAll()
+        /// </summary>
         private static void Get_all_should_return_6_results()
         {
             // arrange
@@ -48,6 +55,42 @@ namespace Runner
             Console.WriteLine($"Count: {contacts.Count}");
             Debug.Assert(contacts.Count == 6);
             contacts.Output();
+        }
+
+        /// <summary>
+        /// Test Add()
+        /// </summary>
+        /// <returns></returns>
+        static int Insert_should_assign_identity_to_new_entity()
+        {
+            // arrange
+            IContactRepository repository = CreateRepository();
+            var contact = new Contact
+            {
+                FirstName = "Joe",
+                LastName = "Blow",
+                Email = "joe.blow@gmail.com",
+                Company = "Microsoft",
+                Title = "Developer"
+            };
+            var address = new Address
+            {
+                AddressType = "Home",
+                StreetAddress = "123 Main Street",
+                City = "Baltimore",
+                StateId = 1,
+                PostalCode = "22222"
+            };
+            contact.Addresses.Add(address);
+
+            // act
+            repository.Add(contact);
+
+            // assert
+            Debug.Assert(contact.Id != 0);
+            Console.WriteLine("*** Contact Inserted ***");
+            Console.WriteLine($"New ID: {contact.Id}");
+            return contact.Id;
         }
         #endregion
     }

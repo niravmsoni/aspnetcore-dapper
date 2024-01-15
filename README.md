@@ -54,3 +54,7 @@
 				- Use the same Query<T> method
 				- In Select statement, make sure to use Alias. 
 				- Refer ContactRepository.GetAll()
+
+			- Saving record to DB
+				- Ideally we should use Command method but since we want to return the ID that we have asked here - SELECT CAST(SCOPE_IDENTITY() as int)
+				- We are using Query method
