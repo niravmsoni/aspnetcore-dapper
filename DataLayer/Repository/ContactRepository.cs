@@ -34,9 +34,15 @@ namespace DataLayer.Repository
             return contact;
         }
 
+        /// <summary>
+        /// Get By Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Contact Find(int id)
         {
-            throw new NotImplementedException();
+            //Parameterized query
+            return _db.Query<Contact>("SELECT * FROM Contacts WHERE Id = @Id", new { id }).SingleOrDefault();
         }
 
         /// <summary>

@@ -18,7 +18,10 @@ namespace Runner
             //Get_all_should_return_6_results();
 
             // Test Add()
-            Insert_should_assign_identity_to_new_entity();
+            var id = Insert_should_assign_identity_to_new_entity();
+
+            //Testing get by ID
+            Find_should_retrieve_existing_entity(id);
         }
 
         private static void Initialize()
@@ -61,7 +64,7 @@ namespace Runner
         /// Test Add()
         /// </summary>
         /// <returns></returns>
-        static int Insert_should_assign_identity_to_new_entity()
+        private static int Insert_should_assign_identity_to_new_entity()
         {
             // arrange
             IContactRepository repository = CreateRepository();
@@ -91,6 +94,27 @@ namespace Runner
             Console.WriteLine("*** Contact Inserted ***");
             Console.WriteLine($"New ID: {contact.Id}");
             return contact.Id;
+        }
+
+        /// <summary>
+        /// Get by ID
+        /// </summary>
+        /// <param name="id"></param>
+        private static void Find_should_retrieve_existing_entity(int id)
+        {
+            // arrange
+            IContactRepository repository = CreateRepository();
+
+            // act
+            var contact = repository.Find(id);
+
+            // assert
+            Console.WriteLine("*** Get Contact ***");
+            contact.Output();
+            Debug.Assert(contact.FirstName == "Joe");
+            Debug.Assert(contact.LastName == "Blow");
+            Debug.Assert(contact.Addresses.Count == 1);
+            Debug.Assert(contact.Addresses.First().StreetAddress == "123 Main Street");
         }
         #endregion
     }
