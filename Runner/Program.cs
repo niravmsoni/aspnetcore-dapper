@@ -21,7 +21,10 @@ namespace Runner
             var id = Insert_should_assign_identity_to_new_entity();
 
             //Testing get by ID
-            Find_should_retrieve_existing_entity(id);
+            //Find_should_retrieve_existing_entity(id);
+
+            //Testing update
+            Modify_should_update_existing_entity(id);
         }
 
         private static void Initialize()
@@ -97,7 +100,7 @@ namespace Runner
         }
 
         /// <summary>
-        /// Get by ID
+        /// Test Get by ID
         /// </summary>
         /// <param name="id"></param>
         private static void Find_should_retrieve_existing_entity(int id)
@@ -115,6 +118,30 @@ namespace Runner
             Debug.Assert(contact.LastName == "Blow");
             Debug.Assert(contact.Addresses.Count == 1);
             Debug.Assert(contact.Addresses.First().StreetAddress == "123 Main Street");
+        }
+
+        /// <summary>
+        /// Test Update
+        /// </summary>
+        /// <param name="id"></param>
+        private static void Modify_should_update_existing_entity(int id)
+        {
+            // arrange
+            IContactRepository repository = CreateRepository();
+
+            // act
+            var contact = repository.Find(id);
+            contact.FirstName = "Bob";
+            repository.Update(contact);
+
+            // create a new repository for verification purposes
+            IContactRepository repository2 = CreateRepository();
+            var modifiedContact = repository2.Find(id);
+
+            // assert
+            Console.WriteLine("*** Contact Modified ***");
+            modifiedContact.Output();
+            Debug.Assert(modifiedContact.FirstName == "Bob");
         }
         #endregion
     }

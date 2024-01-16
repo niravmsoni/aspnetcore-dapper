@@ -59,9 +59,24 @@ namespace DataLayer.Repository
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Update method
+        /// </summary>
+        /// <param name="contact"></param>
+        /// <returns></returns>
         public Contact Update(Contact contact)
         {
-            throw new NotImplementedException();
+            var sql =
+                "UPDATE Contacts " +
+                "SET FirstName = @FirstName, " +
+                "    LastName  = @LastName, " +
+                "    Email     = @Email, " +
+                "    Company   = @Company, " +
+                "    Title     = @Title " +
+                "WHERE Id = @Id";
+
+            _db.Execute(sql, contact);
+            return contact;
         }
     }
 }
