@@ -71,3 +71,4 @@
 			- Provides methods to enable us to write less code for basic CRUD ops
 			- Allows us to do basic CRUD without having to type entire SQL
 			- See GitHub link - https://github.com/DapperLib/Dapper.Contrib
+			- Adding DapperContrib to data layer
