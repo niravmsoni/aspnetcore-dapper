@@ -54,13 +54,17 @@ namespace DataLayer.Repository
             return _db.Query<Contact>("select * from Contacts").ToList();
         }
 
+        /// <summary>
+        /// Delete from contacts table
+        /// </summary>
+        /// <param name="id"></param>
         public void Remove(int id)
         {
-            throw new NotImplementedException();
+            _db.Execute("DELETE FROM Contacts WHERE Id = @Id", new { id });
         }
 
         /// <summary>
-        /// Update method
+        /// Update contact table
         /// </summary>
         /// <param name="contact"></param>
         /// <returns></returns>
