@@ -65,3 +65,9 @@
 
 			- Delete record from DB
 				- Using Execute method to delete record from database by passing in PK
+
+		- Using DapperContrib
+			- Add-on library for enhancing Dapper
+			- Provides methods to enable us to write less code for basic CRUD ops
+			- Allows us to do basic CRUD without having to type entire SQL
+			- See GitHub link - https://github.com/DapperLib/Dapper.Contrib
