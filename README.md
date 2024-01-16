@@ -58,3 +58,10 @@
 			- Saving record to DB
 				- Ideally we should use Command method but since we want to return the ID that we have asked here - SELECT CAST(SCOPE_IDENTITY() as int)
 				- We are using Query method
+
+			- Updating record to DB
+				- Passing object and mapping them in Update SQL statement
+				- We are using Execute method
+
+			- Delete record from DB
+				- Using Execute method to delete record from database by passing in PK
