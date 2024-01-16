@@ -46,25 +46,27 @@
 			- Set DefaultConnection value under Connection string
 
 		- Update Appsettings.json from local machine
-			- List
-				- Query<T>("select statement that maps with T")
-					- Refer ContactRepository.GetAll() method
+		- Basic CRUD Ops
+			- Refer ContactRepository for basic CRUD Ops
+				- List
+					- Query<T>("select statement that maps with T")
+						- Refer ContactRepository.GetAll() method
 			
-			- List with objects that do not match column names
-				- Use the same Query<T> method
-				- In Select statement, make sure to use Alias. 
-				- Refer ContactRepository.GetAll()
+				- List with objects that do not match column names
+					- Use the same Query<T> method
+					- In Select statement, make sure to use Alias. 
+					- Refer ContactRepository.GetAll()
 
-			- Saving record to DB
-				- Ideally we should use Command method but since we want to return the ID that we have asked here - SELECT CAST(SCOPE_IDENTITY() as int)
-				- We are using Query method
+				- Saving record to DB
+					- Ideally we should use Command method but since we want to return the ID that we have asked here - SELECT CAST(SCOPE_IDENTITY() as int)
+					- We are using Query method
 
-			- Updating record to DB
-				- Passing object and mapping them in Update SQL statement
-				- We are using Execute method
+				- Updating record to DB
+					- Passing object and mapping them in Update SQL statement
+					- We are using Execute method
 
-			- Delete record from DB
-				- Using Execute method to delete record from database by passing in PK
+				- Delete record from DB
+					- Using Execute method to delete record from database by passing in PK
 
 		- Using DapperContrib
 			- Add-on library for enhancing Dapper
@@ -72,3 +74,4 @@
 			- Allows us to do basic CRUD without having to type entire SQL
 			- See GitHub link - https://github.com/DapperLib/Dapper.Contrib
 			- Adding DapperContrib to data layer
+			- Refer ContactRepositoryUsingDapperContrib for CRUD Ops using DapperContrib
