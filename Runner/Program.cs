@@ -15,16 +15,16 @@ namespace Runner
             Initialize();
 
             // Test GetAll()
-            //Get_all_should_return_6_results();
+            Get_all_should_return_6_results();
 
             // Test Add()
             var id = Insert_should_assign_identity_to_new_entity();
 
             //Testing GetById(id)
-            //Find_should_retrieve_existing_entity(id);
+            Find_should_retrieve_existing_entity(id);
 
             //Testing Update(id)
-            //Modify_should_update_existing_entity(id);
+            Modify_should_update_existing_entity(id);
 
             //Testing Delete(id)
             Delete_should_remove_entity(id);
@@ -39,14 +39,17 @@ namespace Runner
             _config = builder.Build();
         }
 
+        #region Repository
         /// <summary>
         /// Creating repository by resolving connection string
         /// </summary>
         /// <returns></returns>
         private static IContactRepository CreateRepository()
         {
-            return new ContactRepository(_config.GetConnectionString("DefaultConnection"));
+            //return new ContactRepository(_config.GetConnectionString("DefaultConnection"));
+            return new ContactRepositoryUsingDapperContrib(_config.GetConnectionString("DefaultConnection"));
         }
+        #endregion
 
         #region Below methods are dummy methods for testing the output
         /// <summary>
@@ -119,8 +122,8 @@ namespace Runner
             contact.Output();
             Debug.Assert(contact.FirstName == "Joe");
             Debug.Assert(contact.LastName == "Blow");
-            Debug.Assert(contact.Addresses.Count == 1);
-            Debug.Assert(contact.Addresses.First().StreetAddress == "123 Main Street");
+            //Debug.Assert(contact.Addresses.Count == 1);
+            //Debug.Assert(contact.Addresses.First().StreetAddress == "123 Main Street");
         }
 
         /// <summary>

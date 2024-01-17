@@ -73,3 +73,14 @@
 		- See GitHub link - https://github.com/DapperLib/Dapper.Contrib
 		- Adding DapperContrib to data layer
 		- Refer ContactRepositoryUsingDapperContrib for CRUD Ops using DapperContrib
+		- Compare and contrast changes with ContactRepository
+		- In a nutshell DapperContrib is useful when we have simple straight-forward object mappings. Benefit - We can avoid typing in SQL statements
+		- Important
+			- Usecase when we have a few property in data model that are computed and not present in DB
+				- Refer Contact
+					- IsNew - Not present in DB
+						- Marking it as Computed
+
+					- Address - No column present in DB
+						- Marking Write(false) since we do not want DapperContrib to generate field in insert statement
+

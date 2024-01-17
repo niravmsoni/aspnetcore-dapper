@@ -7,6 +7,9 @@ using Dapper.Contrib.Extensions;
 
 namespace DataLayer.Repository
 {
+    /// <summary>
+    /// Implementation for methods provided by DapperContrib. Compare and contrast differences with ContactRepository
+    /// </summary>
     public class ContactRepositoryUsingDapperContrib : IContactRepository
     {
         private IDbConnection _db;
@@ -17,27 +20,31 @@ namespace DataLayer.Repository
         }
         public Contact Add(Contact contact)
         {
-            throw new NotImplementedException();
+            //It generates standard insert statement based on contact object
+            var id = _db.Insert(contact);
+            contact.Id = (int)id;
+            return contact;
         }
 
         public Contact Find(int id)
         {
-            throw new NotImplementedException();
+            return _db.Get<Contact>(id);
         }
 
         public List<Contact> GetAll()
         {
-            throw new NotImplementedException();
+            return _db.GetAll<Contact>().ToList();
         }
 
         public void Remove(int id)
         {
-            throw new NotImplementedException();
+            _db.Delete(new Contact { Id = id });
         }
 
         public Contact Update(Contact contact)
         {
-            throw new NotImplementedException();
+            _db.Update(contact);
+            return contact;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace DataLayer.Models
+﻿using Dapper.Contrib.Extensions;
+
+namespace DataLayer.Models
 {
     public class Contact
     {
@@ -9,8 +11,10 @@
         public string Company { get; set; }
         public string Title { get; set; }
 
+        [Computed]
         public bool IsNew => Id == default;
 
+        [Write(false)]
         public List<Address> Addresses { get; } = new List<Address>();
     }
 }
