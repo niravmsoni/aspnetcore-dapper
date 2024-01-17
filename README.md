@@ -84,3 +84,7 @@
 					- Address - No column present in DB
 						- Marking Write(false) since we do not want DapperContrib to generate field in insert statement
 
+
+		
+	- Implementing 1..* relations 
+		- 1 Contact can have 1..* addresses
