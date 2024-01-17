@@ -11,6 +11,8 @@
         public string PostalCode { get; set; }
 
         internal bool IsNew => Id == default;
+
+        //Useful for mapping delete against a particular address from UI
         public bool IsDeleted { get; set; }
     }
 }

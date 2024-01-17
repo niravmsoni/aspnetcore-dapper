@@ -17,20 +17,12 @@ namespace Runner
             // Test GetAll()
             //Get_all_should_return_6_results();
 
-            // Test Add()
-            //var id = Insert_should_assign_identity_to_new_entity();
+            var id = Insert_should_assign_identity_to_new_entity();
+            Find_should_retrieve_existing_entity(id);
+            Modify_should_update_existing_entity(id);
+            Delete_should_remove_entity(id);
 
-            //Testing GetById(id)
-            //Find_should_retrieve_existing_entity(id);
-
-            //Testing Update(id)
-            //Modify_should_update_existing_entity(id);
-
-            //Testing Delete(id)
-            //Delete_should_remove_entity(id);
-
-            //Testing Get contacts + address
-            GetContactAndTheirAddress(1);
+            //GetContactAndTheirAddress(1);
         }
 
         private static void Initialize()
@@ -99,7 +91,10 @@ namespace Runner
             contact.Addresses.Add(address);
 
             // act
-            repository.Add(contact);
+            //repository.Add(contact);
+
+            //Save method will save both Contact and address
+            repository.Save(contact);
 
             // assert
             Debug.Assert(contact.Id != 0);
@@ -118,15 +113,18 @@ namespace Runner
             IContactRepository repository = CreateRepository();
 
             // act
-            var contact = repository.Find(id);
+            //var contact = repository.Find(id);
+
+            //Replacing Find with GetFullContact since we want to test implementation
+            var contact = repository.GetFullContact(id);
 
             // assert
             Console.WriteLine("*** Get Contact ***");
             contact.Output();
             Debug.Assert(contact.FirstName == "Joe");
             Debug.Assert(contact.LastName == "Blow");
-            //Debug.Assert(contact.Addresses.Count == 1);
-            //Debug.Assert(contact.Addresses.First().StreetAddress == "123 Main Street");
+            Debug.Assert(contact.Addresses.Count == 1);
+            Debug.Assert(contact.Addresses.First().StreetAddress == "123 Main Street");
         }
 
         /// <summary>
@@ -139,18 +137,24 @@ namespace Runner
             IContactRepository repository = CreateRepository();
 
             // act
-            var contact = repository.Find(id);
+            var contact = repository.GetFullContact(id);
             contact.FirstName = "Bob";
-            repository.Update(contact);
+
+            contact.Addresses[0].StreetAddress = "456 Main Street";
+            //Calling Save to make sure Update happens for both Address, contact
+            //repository.Update(contact);
+
+            repository.Save(contact);
 
             // create a new repository for verification purposes
             IContactRepository repository2 = CreateRepository();
-            var modifiedContact = repository2.Find(id);
+            var modifiedContact = repository2.GetFullContact(id);
 
             // assert
             Console.WriteLine("*** Contact Modified ***");
             modifiedContact.Output();
             Debug.Assert(modifiedContact.FirstName == "Bob");
+            Debug.Assert(modifiedContact.Addresses.First().StreetAddress == "456 Main Street");
         }
 
         /// <summary>

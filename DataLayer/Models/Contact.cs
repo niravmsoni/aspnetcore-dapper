@@ -11,6 +11,7 @@ namespace DataLayer.Models
         public string Company { get; set; }
         public string Title { get; set; }
 
+        //Boolean that checks against default for Int i.e. In case if Id = 0, it will be true meaning its a new record not present in Db. Else it will be false
         [Computed]
         public bool IsNew => Id == default;
 

@@ -15,5 +15,7 @@ namespace DataLayer.Interface
         void Remove(int id);
 
         public Contact GetFullContact(int id);
+
+        void Save(Contact contact);
     }
 }

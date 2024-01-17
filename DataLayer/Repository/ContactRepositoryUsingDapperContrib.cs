@@ -52,6 +52,11 @@ namespace DataLayer.Repository
             _db.Delete(new Contact { Id = id });
         }
 
+        public void Save(Contact contact)
+        {
+            throw new NotImplementedException();
+        }
+
         public Contact Update(Contact contact)
         {
             _db.Update(contact);
