@@ -1,6 +1,6 @@
 ﻿using DataLayer.Interface;
 using DataLayer.Models;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Data;
 using Dapper;
 using Dapper.Contrib.Extensions;

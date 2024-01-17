@@ -90,3 +90,8 @@
 		- 1 Contact can have 1..* addresses
 		- For retriving such records, we can use QueryMultiple() method from Dapper.
 		- See ContactRepository GetFullContact() method
+		- Implemented Save method that takes care of both Insert/Update using IsNew property
+
+	- Issue - While using transaction scope locally, getting this error
+		- This platform does not support distributed transactions.
+		- Maybe it is because SQL Server I am using does not support this usecase

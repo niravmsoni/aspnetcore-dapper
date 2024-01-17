@@ -2,7 +2,8 @@
 using DataLayer.Interface;
 using DataLayer.Models;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
+using System.Transactions;
 
 namespace DataLayer.Repository
 {
@@ -122,6 +123,8 @@ namespace DataLayer.Repository
         /// <exception cref="NotImplementedException"></exception>
         public void Save(Contact contact)
         {
+            //Using Transaction Scope since we have multiple operations to execute for a successful save
+            using var txScope = new TransactionScope();
             if (contact.IsNew)
             {
                 this.Add(contact);
@@ -132,7 +135,7 @@ namespace DataLayer.Repository
             }
 
             //Insert/Update Address
-            foreach(var addr in contact.Addresses.Where(a => !a.IsDeleted))
+            foreach (var addr in contact.Addresses.Where(a => !a.IsDeleted))
             {
                 addr.ContactId = contact.Id;
 
@@ -147,10 +150,13 @@ namespace DataLayer.Repository
             }
 
             //Delete address
-            foreach(var addr in contact.Addresses.Where(a => a.IsDeleted))
+            foreach (var addr in contact.Addresses.Where(a => a.IsDeleted))
             {
                 this.Delete(addr.Id);
             }
+
+            //Calling complete for transaction scope
+            txScope.Complete();
         }
 
         /// <summary>
