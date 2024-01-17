@@ -88,3 +88,5 @@
 		
 	- Implementing 1..* relations 
 		- 1 Contact can have 1..* addresses
+		- For retriving such records, we can use QueryMultiple() method from Dapper.
+		- See ContactRepository GetFullContact() method

@@ -36,6 +36,17 @@ namespace DataLayer.Repository
             return _db.GetAll<Contact>().ToList();
         }
 
+        /// <summary>
+        /// Leaving it as it is
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public Contact GetFullContact(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Remove(int id)
         {
             _db.Delete(new Contact { Id = id });

@@ -55,6 +55,33 @@ namespace DataLayer.Repository
         }
 
         /// <summary>
+        /// Get contact and their address from separate table in one shot
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Contact GetFullContact(int id)
+        {
+            //2 different select statements both returning records for same ID
+            var sql =
+                "SELECT * FROM Contacts WHERE Id = @Id; " +
+                "SELECT * FROM Addresses WHERE ContactId = @Id";
+
+            //Using QueryMultiple to retrieve multiple result sets in query results.
+            using (var multipleResults = _db.QueryMultiple(sql, new { Id = id }))
+            {
+                var contact = multipleResults.Read<Contact>().SingleOrDefault();
+
+                var addresses = multipleResults.Read<Address>().ToList();
+                if (contact != null && addresses != null)
+                {
+                    contact.Addresses.AddRange(addresses);
+                }
+
+                return contact;
+            }
+        }
+
+        /// <summary>
         /// Delete from contacts table
         /// </summary>
         /// <param name="id"></param>

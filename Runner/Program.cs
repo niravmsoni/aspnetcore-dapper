@@ -15,19 +15,22 @@ namespace Runner
             Initialize();
 
             // Test GetAll()
-            Get_all_should_return_6_results();
+            //Get_all_should_return_6_results();
 
             // Test Add()
-            var id = Insert_should_assign_identity_to_new_entity();
+            //var id = Insert_should_assign_identity_to_new_entity();
 
             //Testing GetById(id)
-            Find_should_retrieve_existing_entity(id);
+            //Find_should_retrieve_existing_entity(id);
 
             //Testing Update(id)
-            Modify_should_update_existing_entity(id);
+            //Modify_should_update_existing_entity(id);
 
             //Testing Delete(id)
-            Delete_should_remove_entity(id);
+            //Delete_should_remove_entity(id);
+
+            //Testing Get contacts + address
+            GetContactAndTheirAddress(1);
         }
 
         private static void Initialize()
@@ -46,8 +49,8 @@ namespace Runner
         /// <returns></returns>
         private static IContactRepository CreateRepository()
         {
-            //return new ContactRepository(_config.GetConnectionString("DefaultConnection"));
-            return new ContactRepositoryUsingDapperContrib(_config.GetConnectionString("DefaultConnection"));
+            return new ContactRepository(_config.GetConnectionString("DefaultConnection"));
+            //return new ContactRepositoryUsingDapperContrib(_config.GetConnectionString("DefaultConnection"));
         }
         #endregion
 
@@ -169,6 +172,18 @@ namespace Runner
             // assert
             Debug.Assert(deletedEntity == null);
             Console.WriteLine("*** Contact Deleted ***");
+        }
+
+        /// <summary>
+        /// Testing Get address + Contacts
+        /// </summary>
+        /// <param name="id"></param>
+        private static void GetContactAndTheirAddress(int id)
+        {
+            // arrange
+            IContactRepository repository = CreateRepository();
+            var response = repository.GetFullContact(id);
+            response.Output();
         }
         #endregion
     }
