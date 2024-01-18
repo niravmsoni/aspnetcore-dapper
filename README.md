@@ -92,9 +92,10 @@
 		- See ContactRepository GetFullContact() method
 		- Implemented Save method that takes care of both Insert/Update using IsNew property
 
-	- Issue - While using transaction scope locally, getting this error
+	- Issue - While using transaction scope locally, getting this error - UPDATES
 		- This platform does not support distributed transactions.
 		- Maybe it is because SQL Server I am using does not support this usecase
+		- This issue is resolved. It was occurring because within transaction scope, there were different SQL connections getting opened up. After sharing the connection from within the TxScope, it resolves the issue
 
 -3. Beyond Basics
 	- Stored Procedures and Dynamic Params
