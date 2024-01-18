@@ -17,12 +17,14 @@ namespace Runner
             // Test GetAll()
             //Get_all_should_return_6_results();
 
-            var id = Insert_should_assign_identity_to_new_entity();
-            Find_should_retrieve_existing_entity(id);
-            Modify_should_update_existing_entity(id);
-            Delete_should_remove_entity(id);
+            //var id = Insert_should_assign_identity_to_new_entity();
+            //Find_should_retrieve_existing_entity(id);
+            //Modify_should_update_existing_entity(id);
+            //Delete_should_remove_entity(id);
 
             //GetContactAndTheirAddress(1);
+
+            List_Support_Should_Produce_Correct_Results_With_In_Statmenet();
         }
 
         private static void Initialize()
@@ -45,9 +47,18 @@ namespace Runner
             //return new ContactRepositoryUsingDapperContrib(_config.GetConnectionString("DefaultConnection"));
             //return new ContactRepositoryUsingStoredProc(_config.GetConnectionString("DefaultConnection"));
         }
+
+        /// <summary>
+        /// Creating a separate method since it does not implement IContactRepository interface
+        /// </summary>
+        /// <returns></returns>
+        private static ContactRepositoryAdditionalOperations CreateRepositoryExtra()
+        {
+            return new ContactRepositoryAdditionalOperations(_config.GetConnectionString("DefaultConnection"));
+        }
         #endregion
 
-        #region Below methods are dummy methods for testing the output
+        #region Below methods are dummy methods for testing the output ContactRepository
         /// <summary>
         /// Testing GetAll()
         /// </summary>
@@ -189,6 +200,21 @@ namespace Runner
             IContactRepository repository = CreateRepository();
             var response = repository.GetFullContact(id);
             response.Output();
+        }
+        #endregion
+
+        #region ContactRepositoryExtra
+        private static void List_Support_Should_Produce_Correct_Results_With_In_Statmenet()
+        {
+            //arrange 
+            var repository = CreateRepositoryExtra();
+
+            //Act
+            var contacts = repository.GetContactsById(1, 2, 4);
+
+            //Assert
+            Debug.Assert(contacts.Count == 3);
+            contacts.Output();
         }
         #endregion
     }

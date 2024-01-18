@@ -102,7 +102,11 @@
 	- Stored Procedures and Dynamic Params
 		- Dapper does support interacting to database via SPs
 
-	- Implementation
-		- Refer Stored procs present under Database project
-		- Refer ContactRepositoryUsingStoredProc for studying interactions with DB
-		- Most of the code is pretty much the same. We need to set the CommandType parameter in Execute() or Query() or QueryMultiple() method as CommandType.StoredProcedure
+		- Implementation	
+			- Refer Stored procs present under Database project
+			- Refer ContactRepositoryUsingStoredProc for studying interactions with DB
+			- Most of the code is pretty much the same. We need to set the CommandType parameter in Execute() or Query() or QueryMultiple() method as CommandType.StoredProcedure
+	
+	- Working with Arrays that go as IN statement in WHERE clause
+		- Dapper is able to convert [] into comma separated values required in IN statement in SQL
+		- See ContactRepositoryAdditionalOperations -> GetContactsById method
