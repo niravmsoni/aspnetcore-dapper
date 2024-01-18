@@ -105,3 +105,4 @@
 	- Implementation
 		- Refer Stored procs present under Database project
 		- Refer ContactRepositoryUsingStoredProc for studying interactions with DB
+		- Most of the code is pretty much the same. We need to set the CommandType parameter in Execute() or Query() or QueryMultiple() method as CommandType.StoredProcedure
