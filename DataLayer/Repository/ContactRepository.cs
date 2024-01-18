@@ -125,6 +125,8 @@ namespace DataLayer.Repository
         {
             //Using Transaction Scope since we have multiple operations to execute for a successful save
             using var txScope = new TransactionScope();
+            //Opening and closing connection in TxScope to resolve Distributed error
+            _db.Open();
             if (contact.IsNew)
             {
                 this.Add(contact);
@@ -155,6 +157,7 @@ namespace DataLayer.Repository
                 this.Delete(addr.Id);
             }
 
+            _db.Close();
             //Calling complete for transaction scope
             txScope.Complete();
         }

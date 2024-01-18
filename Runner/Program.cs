@@ -43,6 +43,7 @@ namespace Runner
         {
             return new ContactRepository(_config.GetConnectionString("DefaultConnection"));
             //return new ContactRepositoryUsingDapperContrib(_config.GetConnectionString("DefaultConnection"));
+            //return new ContactRepositoryUsingStoredProc(_config.GetConnectionString("DefaultConnection"));
         }
         #endregion
 

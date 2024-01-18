@@ -95,3 +95,11 @@
 	- Issue - While using transaction scope locally, getting this error
 		- This platform does not support distributed transactions.
 		- Maybe it is because SQL Server I am using does not support this usecase
+
+-3. Beyond Basics
+	- Stored Procedures and Dynamic Params
+		- Dapper does support interacting to database via SPs
+
+	- Implementation
+		- Refer Stored procs present under Database project
+		- Refer ContactRepositoryUsingStoredProc for studying interactions with DB
