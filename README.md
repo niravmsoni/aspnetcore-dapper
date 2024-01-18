@@ -96,6 +96,7 @@
 		- This platform does not support distributed transactions.
 		- Maybe it is because SQL Server I am using does not support this usecase
 		- This issue is resolved. It was occurring because within transaction scope, there were different SQL connections getting opened up. After sharing the connection from within the TxScope, it resolves the issue
+		- Refer answer on StackOverflow here - https://stackoverflow.com/questions/56387125/two-dbcontexts-on-same-server-throws-this-platform-does-not-support-distribute/77841154#77841154
 
 -3. Beyond Basics
 	- Stored Procedures and Dynamic Params
