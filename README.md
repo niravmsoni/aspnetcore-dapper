@@ -111,7 +111,8 @@
 		- Dapper is able to convert [] into comma separated values required in IN statement in SQL
 		- See ContactRepositoryAdditionalOperations -> GetContactsById method
 		- Same implemetation achievable using dynamic class as well. Refer GetDynamicContactsById method
-		- Benefits of dynamic
-			- C#4
-			- Useful in scenarios with Json
-			- Useful when we do not want to type out entire class to match DB structure
+			- Only difference is within Query method, we do not specify <> type. Dapper implicitly considers it as dynamic return type
+			- Benefits of dynamic
+				- C#4
+				- Useful in scenarios with Json
+				- Useful when we do not want to type out entire class to match DB structure
