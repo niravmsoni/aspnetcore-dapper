@@ -116,3 +116,10 @@
 				- C#4
 				- Useful in scenarios with Json
 				- Useful when we do not want to type out entire class to match DB structure
+
+	- Bulk-inserts
+		- Bad approach is to insert records in for loop.
+		- Better approach - Dapper enables us to pass in arrays and it would take care of this for us
+		- See BulkInsertContacts()
+		- Checking the second argument i.e. list/array - Dapper is able to understand it needs to do multiple round trips to DB and needs to insert multiple records
+		- Important to note - This works but it is not best from performance standpoint. This is more useful from syntax perspective

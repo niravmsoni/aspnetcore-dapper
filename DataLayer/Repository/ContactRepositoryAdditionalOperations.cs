@@ -38,5 +38,21 @@ namespace DataLayer.Repository
             //Removing Contact as generic type. Dapper will infer that we're seeking to use dynamic object
             return _db.Query("SELECT * FROM Contacts WHERE ID IN @Ids", new { Ids = ids }).ToList();
         }
+
+        /// <summary>
+        /// Test Bulk insert capabilities
+        /// </summary>
+        /// <param name="contacts"></param>
+        /// <returns></returns>
+        public int BulkInsertContacts(List<Contact> contacts)
+        {
+            //Syntax is similar to what we used for inserting single record in DB
+            //Execute method understands second param is array/list and is smart enough to execute this multiple times
+            //Important to note - This did a 4 round trip to DB. So, this is not that Performant
+            var sql =
+                "INSERT INTO Contacts (FirstName, LastName, Email, Company, Title) VALUES(@FirstName, @LastName, @Email, @Company, @Title); " +
+                "SELECT CAST(SCOPE_IDENTITY() as int)";
+            return _db.Execute(sql, contacts);
+        }
     }
 }

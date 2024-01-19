@@ -26,9 +26,11 @@ namespace Runner
 
             //Testing strongly return type
             //List_Support_Should_Produce_Correct_Results_With_In_Statmenet();
-            
+
             //Testing same response with dynamic return type
-            List_Support_Should_Produce_Correct_Results_With_In_Statmenet_With_Dynamic_Keyword();
+            //List_Support_Should_Produce_Correct_Results_With_In_Statmenet_With_Dynamic_Keyword();
+
+            Bulk_insert_should_insert_4_rows();
         }
 
         private static void Initialize()
@@ -233,6 +235,26 @@ namespace Runner
             Debug.Assert(contacts.Count == 3);
             Console.WriteLine($"First FirstName is: {contacts.First().FirstName}");
             contacts.Output();
+        }
+
+        private static void Bulk_insert_should_insert_4_rows()
+        {
+            // arrange
+            var repository = CreateRepositoryExtra();
+            var contacts = new List<Contact>
+            {
+                new Contact { FirstName = "Charles", LastName = "Barkley" },
+                new Contact { FirstName = "Scottie", LastName = "Pippen" },
+                new Contact { FirstName = "Tim", LastName = "Duncan" },
+                new Contact { FirstName = "Patrick", LastName = "Ewing" }
+            };
+
+            // act - Testing Bulk insert
+            var rowsAffected = repository.BulkInsertContacts(contacts);
+
+            // assert
+            Console.WriteLine($"Rows inserted: {rowsAffected}");
+            Debug.Assert(rowsAffected == 4);
         }
         #endregion
     }
