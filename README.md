@@ -110,3 +110,8 @@
 	- Working with Arrays that go as IN statement in WHERE clause
 		- Dapper is able to convert [] into comma separated values required in IN statement in SQL
 		- See ContactRepositoryAdditionalOperations -> GetContactsById method
+		- Same implemetation achievable using dynamic class as well. Refer GetDynamicContactsById method
+		- Benefits of dynamic
+			- C#4
+			- Useful in scenarios with Json
+			- Useful when we do not want to type out entire class to match DB structure

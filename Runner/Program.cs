@@ -24,7 +24,11 @@ namespace Runner
 
             //GetContactAndTheirAddress(1);
 
-            List_Support_Should_Produce_Correct_Results_With_In_Statmenet();
+            //Testing strongly return type
+            //List_Support_Should_Produce_Correct_Results_With_In_Statmenet();
+            
+            //Testing same response with dynamic return type
+            List_Support_Should_Produce_Correct_Results_With_In_Statmenet_With_Dynamic_Keyword();
         }
 
         private static void Initialize()
@@ -214,6 +218,20 @@ namespace Runner
 
             //Assert
             Debug.Assert(contacts.Count == 3);
+            contacts.Output();
+        }
+
+        private static void List_Support_Should_Produce_Correct_Results_With_In_Statmenet_With_Dynamic_Keyword()
+        {
+            //arrange 
+            var repository = CreateRepositoryExtra();
+
+            //Act
+            var contacts = repository.GetDynamicContactsById(1, 2, 4);
+
+            //Assert
+            Debug.Assert(contacts.Count == 3);
+            Console.WriteLine($"First FirstName is: {contacts.First().FirstName}");
             contacts.Output();
         }
         #endregion
