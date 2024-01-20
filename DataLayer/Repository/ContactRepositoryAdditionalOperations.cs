@@ -65,5 +65,42 @@ namespace DataLayer.Repository
             //{=stateId} - Special index needed for literal replacement and pass stateId as anonymous type param
             return _db.Query<Address>("SELECT * FROM Addresses WHERE StateId = {=stateId}", new { stateId }).ToList();
         }
+
+        /// <summary>
+        /// Test Multi-mapping
+        /// </summary>
+        /// <returns></returns>
+        public List<Contact> GetAllContactsWithAddresses()
+        {
+            //With Inner join - If a contact has more than 1 address,we could see it return multiple values
+            var sql = "SELECT * FROM Contacts AS C INNER JOIN Addresses AS A ON A.ContactId = C.Id";
+
+            //Below code works perfectly fine for 1..1 mapping
+            //First generic value is the object we're mapping to
+            //Second generic value is Child object
+            //Third generic value is the return type since its Func
+            //var contacts = _db.Query<Contact, Address, Contact>(sql, (contact, address) =>
+            //{
+            //    contact.Addresses.Add(address);
+            //    return contact;
+            //});
+            //return contacts.ToList();
+
+            //Below code works fine for 1..* mapping
+            var contactDict = new Dictionary<int, Contact>();
+            var contacts = _db.Query<Contact, Address, Contact>(sql, (contact, address) =>
+            {
+                if (!contactDict.TryGetValue(contact.Id, out var currentContact))
+                {
+                    currentContact = contact;
+                    contactDict.Add(currentContact.Id, currentContact);
+                }
+
+                currentContact.Addresses.Add(address);
+                return currentContact;
+            });
+            return contacts.Distinct().ToList();
+
+        }
     }
 }

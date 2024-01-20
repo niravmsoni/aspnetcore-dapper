@@ -129,4 +129,11 @@
 		- Not sent as parameter to DB. Allow for better query execution plans and filtered index usage
 		- IMP - If this was enabled for string type, it would open up possibility for SQL injection attacks
 		- See GetAddressesByState()
-		- Special syntax used {=stateId} and then assigning value using anonymous type 
+		- Special syntax used {=stateId} and then assigning value using anonymous type
+
+	- Multi-mapping
+		- Used when we have 1..1 or 1..* relationships between objects and eagerly load all objects in single query
+		- Typically when we have a usecase to join multiple tables, we need to use multi mapping
+		- Within Query method there are 7 overloads available.
+		- See GetAllContactsWithAddresses()
+		- This method has both variants present 1..1 adn 1..*. Do not, for producing correct results with 1..*, it needs some additional work from our end
