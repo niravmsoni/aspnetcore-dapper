@@ -137,3 +137,9 @@
 		- Within Query method there are 7 overloads available.
 		- See GetAllContactsWithAddresses()
 		- This method has both variants present 1..1 adn 1..*. Do not, for producing correct results with 1..*, it needs some additional work from our end
+
+	- Works with multiple providers
+		- Dapper supports multiple DB providers
+			- SQLite, SQLCE, Firebird, Oracle, MySQL, PostgreSQL, SQL Server
+		- See more details here - https://github.com/DapperLib/Dapper?tab=readme-ov-file#will-dapper-work-with-my-db-provider
+		
