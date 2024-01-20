@@ -123,3 +123,10 @@
 		- See BulkInsertContacts()
 		- Checking the second argument i.e. list/array - Dapper is able to understand it needs to do multiple round trips to DB and needs to insert multiple records
 		- Important to note - This works but it is not best from performance standpoint. This is more useful from syntax perspective
+
+	- Literal replacements
+		- Supported for boolean and numeric data-types
+		- Not sent as parameter to DB. Allow for better query execution plans and filtered index usage
+		- IMP - If this was enabled for string type, it would open up possibility for SQL injection attacks
+		- See GetAddressesByState()
+		- Special syntax used {=stateId} and then assigning value using anonymous type 

@@ -30,7 +30,11 @@ namespace Runner
             //Testing same response with dynamic return type
             //List_Support_Should_Produce_Correct_Results_With_In_Statmenet_With_Dynamic_Keyword();
 
-            Bulk_insert_should_insert_4_rows();
+            //Testing bulk inserts
+            ///Bulk_insert_should_insert_4_rows();
+
+            //Testing literal replacement
+            GetIllinoisAddresses();
         }
 
         private static void Initialize()
@@ -255,6 +259,19 @@ namespace Runner
             // assert
             Console.WriteLine($"Rows inserted: {rowsAffected}");
             Debug.Assert(rowsAffected == 4);
+        }
+
+        private static void GetIllinoisAddresses()
+        {
+            // arrange
+            var repository = CreateRepositoryExtra();
+
+            // act
+            var addresses = repository.GetAddressesByState(17);
+
+            // assert
+            Debug.Assert(addresses.Count == 2);
+            addresses.Output();
         }
         #endregion
     }

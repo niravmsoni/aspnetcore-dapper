@@ -54,5 +54,16 @@ namespace DataLayer.Repository
                 "SELECT CAST(SCOPE_IDENTITY() as int)";
             return _db.Execute(sql, contacts);
         }
+
+        /// <summary>
+        /// Test Literal replacement
+        /// </summary>
+        /// <param name="stateId"></param>
+        /// <returns></returns>
+        public List<Address> GetAddressesByState(int stateId)
+        {
+            //{=stateId} - Special index needed for literal replacement and pass stateId as anonymous type param
+            return _db.Query<Address>("SELECT * FROM Addresses WHERE StateId = {=stateId}", new { stateId }).ToList();
+        }
     }
 }
