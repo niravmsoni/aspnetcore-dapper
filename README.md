@@ -148,3 +148,6 @@
 			- QueryAsync
 			- ExecuteAsync
 			- ExecuteScaler etc.
+
+	- Futher
+		- Combine Dapper with data access patterns such as UoW. See this - https://github.com/timschreiber/DapperUnitOfWork
