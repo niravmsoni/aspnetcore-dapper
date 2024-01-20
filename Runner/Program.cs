@@ -3,6 +3,7 @@ using DataLayer.Models;
 using DataLayer.Repository;
 using Microsoft.Extensions.Configuration;
 using System.Diagnostics;
+using static Org.BouncyCastle.Math.EC.ECCurve;
 
 namespace Runner
 {
@@ -289,6 +290,19 @@ namespace Runner
             contacts.Output();
             Debug.Assert(contacts.Count == 6);
             Debug.Assert(contacts.First().Addresses.Count == 2);
+        }
+
+        private static void Get_all_should_return_6_results_mysql()
+        {
+            var repository = new ContactRepositoryMySql(_config.GetConnectionString("MySqlConnection"));
+
+            // act
+            var contacts = repository.GetAll();
+
+            // assert
+            Console.WriteLine($"Count: {contacts.Count}");
+            Debug.Assert(contacts.Count == 6);
+            contacts.Output();
         }
         #endregion
     }
