@@ -102,5 +102,15 @@ namespace DataLayer.Repository
             return contacts.Distinct().ToList();
 
         }
+
+        /// <summary>
+        /// Async implementation
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<Contact>> GetAllAsync()
+        {
+            var contacts = await _db.QueryAsync<Contact>("SELECT * FROM Contacts");
+            return contacts.ToList();
+        }
     }
 }

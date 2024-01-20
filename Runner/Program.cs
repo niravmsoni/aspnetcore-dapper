@@ -10,7 +10,9 @@ namespace Runner
     public class Program
     {
         private static IConfigurationRoot _config;
-        public static void Main(string[] args)
+
+        //Add x to hide this method and use async one defined below
+        public static void xMain(string[] args)
         {
             // Call Initialize to setup configuration object
             Initialize();
@@ -39,6 +41,12 @@ namespace Runner
 
             //Testing multi-mapping
             Get_all_should_return_6_results_with_addresses();
+        }
+
+        public static async Task Main(string[] args)
+        {
+            Initialize();
+            await Get_all_should_return_6_results_async();
         }
 
         private static void Initialize()
@@ -298,6 +306,20 @@ namespace Runner
 
             // act
             var contacts = repository.GetAll();
+
+            // assert
+            Console.WriteLine($"Count: {contacts.Count}");
+            Debug.Assert(contacts.Count == 6);
+            contacts.Output();
+        }
+
+        private static async Task Get_all_should_return_6_results_async()
+        {
+            // arrange
+            var repository = CreateRepositoryExtra();
+
+            // act
+            var contacts = await repository.GetAllAsync();
 
             // assert
             Console.WriteLine($"Count: {contacts.Count}");

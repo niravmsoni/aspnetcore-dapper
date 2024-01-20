@@ -143,3 +143,8 @@
 			- SQLite, SQLCE, Firebird, Oracle, MySQL, PostgreSQL, SQL Server
 		- See more details here - https://github.com/DapperLib/Dapper?tab=readme-ov-file#will-dapper-work-with-my-db-provider
 		
+	- Async versions
+		- Dapper supports all different method we implemented in an async version
+			- QueryAsync
+			- ExecuteAsync
+			- ExecuteScaler etc.
